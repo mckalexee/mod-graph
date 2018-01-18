@@ -7,8 +7,8 @@
     </div>
     <div class="input-group">
       <label for="sizeInput">Size</label>
-      <input type="number" #sizeInput (keyup.enter)="updateSize(sizeInput.value)" (blur)="updateSize(sizeInput.value)" [(ngModel)]="size"
-        name="size" min="1">
+      <input type="number" [value]="size" #sizeInput (keyup.enter)="updateSize(sizeInput.value)" (blur)="updateSize(sizeInput.value)" name="size"
+        min="1">
     </div>
     <div class="input-group">
       <label for="speed">Speed</label>
