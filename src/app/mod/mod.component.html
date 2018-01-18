@@ -7,13 +7,22 @@
     </div>
     <div class="input-group">
       <label for="sizeInput">Size</label>
-      <input type="number" [value]="size" #sizeInput (keyup.enter)="updateSize(sizeInput.value)" (blur)="updateSize(sizeInput.value)" name="size"
-        min="1">
+      <input type="number" [value]="size" #sizeInput (keyup.enter)="updateSize(sizeInput.value)" (blur)="updateSize(sizeInput.value)"
+        name="size" min="1">
     </div>
     <div class="input-group">
       <label for="speed">Speed</label>
       <input type="number" [(ngModel)]="speed" name="speed" min="1">
     </div>
+
+    <div class="radio-group">
+      <input type="radio" name="imageType" id="bw" value="bw" [(ngModel)]="type" (change)="loadColors()">
+      <label for="imageType">B/W</label>
+      <input type="radio" name="imageType" id="color" value="color" [(ngModel)]="type" (change)="loadColors()">
+      <label for="imageType">Color</label>
+    </div>
+
+
     <button class="red" (click)="stop()" *ngIf="isRunning" type="button">Stop</button>
     <button class="green" (click)="start()" *ngIf="!isRunning" type="button">Start</button>
   </div>

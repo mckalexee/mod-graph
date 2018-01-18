@@ -22,18 +22,23 @@ export class ModComponent implements OnInit, OnDestroy {
   colorHash = '';
   frame = 0;
   speed = 1;
-  size = 256;
+  size = 400;
   weight = 100;
+
+  type = 'bw';
 
   constructor(private ngZone: NgZone, private color: ColorsService) { }
 
   ngOnInit() {
-    this.colorArray = this.color.generateBWLine(this.size, this.weight, true);
+    // this.colorArray = this.color.generateBWLine(this.size, this.weight, true);
+    this.loadColors();
     this.ngZone.runOutsideAngular(() => this.draw());
     this.ctx = this.canvas.nativeElement.getContext('2d');
     this.isRunning = true;
     this.setCanvasSize();
     this.draw();
+
+    console.log(this.color.generateRainbow());
 
   }
 
@@ -58,7 +63,7 @@ export class ModComponent implements OnInit, OnDestroy {
       size = 1;
     }
     this.size = size;
-    this.colorArray = this.color.generateBWLine(size, this.weight, true);
+    this.loadColors();
     this.clearCache();
   }
 
@@ -72,9 +77,28 @@ export class ModComponent implements OnInit, OnDestroy {
       weight = 100;
     }
     this.weight = weight;
-    this.colorArray = this.color.generateBWLine(this.size, weight, true);
+    this.loadColors();
     this.clearCache();
     this.start();
+  }
+
+  /** Loads the array of colors based on the type/size/weight */
+  loadColors() {
+    console.log('Loading colors', this.type);
+    switch (this.type) {
+      case 'bw':
+        this.colorArray = this.color.generateBWLine(this.size, this.weight);
+        break;
+
+      case 'color':
+        this.colorArray = this.color.generateRainbow(this.size);
+        break;
+
+      default:
+        this.colorArray = this.color.generateBWLine(this.size, this.weight);
+        break;
+    }
+    this.clearCache();
   }
 
   /** Clears the image cache when parameters changee */
