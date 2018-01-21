@@ -6,13 +6,15 @@ canvas {
 .toolbar {
   position: absolute;
   z-index: 1;
-  width: 100%;
   top: 0;
-  background: rgba(0, 27, 90, 0.85);
+  background: rgba(0, 3, 49, 0.95);
   color: white;
   display: flex;
-  padding: 10px 0;
+  padding: 10px;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 0 0 10px 0;
 }
 
 .input-group {
@@ -22,26 +24,31 @@ canvas {
   margin: 0 10px;
   label {
     margin-bottom: 5px;
+    margin-top: 10px;
+  }
+  input {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
   }
 }
 
-input {
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-}
+
 
 .radio-group {
   display: flex;
   align-items: center;
+  margin-top: 10px;
 }
 
 button {
   border: none;
   background: #000;
   color: white;
-  margin: 10px 10px;
-  padding: 0 20px;
+  margin: 10px;
+  width: 100%;
+  padding: 10px 20px;
   border-radius: 10px;
   cursor: pointer;
 

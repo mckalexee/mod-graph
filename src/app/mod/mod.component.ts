@@ -119,20 +119,24 @@ export class ModComponent implements OnInit, OnDestroy {
     }
     const size = this.colorArray.length;
 
+    let imageSize = this.size;
+
+    if (imageSize < 200) {
+      imageSize = Math.floor(200 / imageSize) * imageSize;
+    }
+
     let imageData: ImageData;
     if (this.imgMap[this.frame]) {
       imageData = this.imgMap[this.frame];
     } else {
 
-      imageData = this.ctx.createImageData(this.size, this.size);
+      imageData = this.ctx.createImageData(imageSize, imageSize);
       const data = imageData.data;
 
       for (let i = 0; i < data.length; i += 4) {
-        const x = Math.floor(i / 4 % this.size);
-        const y = Math.floor(i / (4 * this.size));
-        // console.log(y);
+        const x = Math.floor(i / 4 % imageSize);
+        const y = Math.floor(i / (4 * imageSize));
         const p = this.getPixelIndex(x, y, size, this.frame);
-
 
         data[i] = this.colorArray[p][0];
         data[i + 1] = this.colorArray[p][1];
@@ -144,9 +148,9 @@ export class ModComponent implements OnInit, OnDestroy {
     }
 
     // Tile the created image based on the canvas size
-    for (let x = 0; x < Math.floor(this.canvasWidth / this.size) + 1; x++) {
-      for (let y = 0; y < Math.floor(this.canvasHeight / this.size) + 1; y++) {
-        this.ctx.putImageData(imageData, this.size * x, this.size * y);
+    for (let x = 0; x < Math.floor(this.canvasWidth / imageSize) + 1; x++) {
+      for (let y = 0; y < Math.floor(this.canvasHeight / imageSize) + 1; y++) {
+        this.ctx.putImageData(imageData, imageSize * x, imageSize * y);
       }
     }
 

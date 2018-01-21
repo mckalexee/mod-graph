@@ -45,7 +45,7 @@ export class ColorsService {
     /* There are only 256 B-W colors that we can pick from.
      * So we need to be able to take whatever size/scale the image is and
      * distribute it over that 256 color range.
-     * A scale of 256 should have a 1 to 1 parity.
+     * A scale of 256 should be 1 to 1.
      * But for a scale of 600, every 2.34 pixels should change color.
      * If the scale is 100 we shoud skip every 2.56 colors
      */
@@ -74,6 +74,7 @@ export class ColorsService {
     return colorArr;
   }
 
+  /** Generates a rainbow by cycling through all hues */
   generateRainbow(size = 360, weight = 100, smooth = true) {
     const colorArr = [];
     const inc = size / 360;
